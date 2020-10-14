@@ -140,13 +140,14 @@ function sendconfirmationmail($content,$encodedPswd)
 	}
 	$mail->Port = MAIL_PORT; // or 587
 	$mail->SMTPOptions = array('ssl' => array('verify_peer' => false,'verify_peer_name' => false,'allow_self_signed' => true));
-
+    /*
     $pos = strpos(MAIL_USERNAME, 'yahoo');
 	if($pos !== false)
 		$mail->setFrom(MAIL_USERNAME,'Do not Reply');
 	else
 		$mail->setFrom(DONOTREPLYEMAIL,'Do not Reply');
-
+    */
+    $mail->setFrom(MAIL_USERNAME,'Do not Reply');
     $mail->Subject = APPLICATION_NAME." - successfully installed";
     $mail->msgHTML($htmlcontentdata);
     $mail->addAddress(SUPERADMIN_EMAIL,'Super Admin');
