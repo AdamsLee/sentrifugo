@@ -207,14 +207,15 @@ public static function _checkMail($options = array()) {
 	    }
 		$mail->Port = $config['port']; // or 587
 		$mail->SMTPOptions = array('ssl' => array('verify_peer' => false,'verify_peer_name' => false,'allow_self_signed' => true));
-	
+	    /* Fix for extmail SMTP configuration
 	    $yahoo_smtp = strpos($config['username'], 'yahoo');
 		if($yahoo_smtp !== false) {
 			//Fix for Yahoo SMTP configuration.
 			$mail->setFrom($config['username'],'Do not Reply');
 		} else {
 			$mail->setFrom($options['fromEmail'],$options['fromName']);
-		}
+		}*/
+	    $mail->setFrom($config['username'],'Do not Reply');
 		
 	    $mail->Subject = $options['subject'];
 	    $mail->msgHTML($htmlcontentdata);
