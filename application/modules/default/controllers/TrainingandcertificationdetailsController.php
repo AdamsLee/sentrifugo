@@ -423,14 +423,14 @@ class Default_TrainingandcertificationdetailsController extends Zend_Controller_
 
 			$id = $this->getRequest()->getParam('id');	
 
-			$course_name = $this->_request->getParam('course_name');
-			$description = $this->_request->getParam('description');
-			$course_level = $this->_request->getParam('course_level');
+			$course_name = htmlspecialchars($this->_request->getParam('course_name'));
+			$description = htmlspecialchars($this->_request->getParam('description'));
+			$course_level = htmlspecialchars($this->_request->getParam('course_level'));
 
-			$course_offered_by = $this->_request->getParam('course_offered_by');
-			$certification_name = $this->_request->getParam('certification_name');
+			$course_offered_by = htmlspecialchars($this->_request->getParam('course_offered_by'));
+			$certification_name = htmlspecialchars($this->_request->getParam('certification_name'));
 
-			$issuedDate = $this->_request->getParam('issued_date',null);
+			$issuedDate = htmlspecialchars($this->_request->getParam('issued_date',null));
 			if($issuedDate != "")
 			{
 				$issuedDate = sapp_Global::change_date($issuedDate, 'database');
