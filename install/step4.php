@@ -181,14 +181,15 @@ function mail_send($tls,$smtpserver,$username,$password,$port,$auth)
     $mail->Port = $port; // or 587
 	$mail->SMTPOptions = array('ssl' => array('verify_peer' => false,'verify_peer_name' => false,'allow_self_signed' => true));
 	
-	$yahoo_smtp = strpos($username, 'yahoo');
+	/*
 	if($yahoo_smtp !== false) {
 		//Fix for Yahoo SMTP configuration.
 		$mail->setFrom($username,'Do not Reply');
 	}else {
 		$mail->setFrom(DONOTREPLYEMAIL,'Do not Reply');
 	}
-	
+	*/
+    $mail->setFrom($username,'Do not Reply');//Fix for SMTP configuration for extmail
     $mail->Subject = "Test Mail Checking";
     $mail->msgHTML($htmlcontentdata);
     $mail->addAddress(SUPERADMIN_EMAIL,'Super Admin');
