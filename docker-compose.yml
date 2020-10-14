@@ -1,0 +1,29 @@
+version: '3.4'
+#This file should be put into the parent directory of this code repository.
+
+services:
+  ilabmariadb:
+    restart: always
+    image: mariadb:latest
+    environment:
+    - MYSQL_ROOT_PASSWORD=mysql
+    ports:
+    - "3306:3306"
+    volumes:
+    - ./mariadbdata:/var/lib/mysql
+    container_name: ilabmariadb
+
+  ilabsentrifugo:
+    restart: always
+    image: ilab/sentrifugo:latest
+    build:
+        context: ./sentrifugo
+        dockerfile: Dockerfile
+        network: host
+    depends_on:
+    - ilabmariadb
+    ports:
+    - "80:80"
+    container_name: ilabsentrifugo
+    volumes:
+    - ./sentrifugo:/var/www/html
